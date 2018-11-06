@@ -14,6 +14,11 @@ function eventListeners(){
 
   //Al cargar el documento
   document.addEventListener('DOMContentLoaded', inicioApp);
+
+  //Validar input al activar evento blur
+  email.addEventListener('blur', validarCampo)
+  asunto.addEventListener('blur', validarCampo)
+  mensaje.addEventListener('blur', validarCampo)
 }
 
 //Funciones
@@ -22,4 +27,15 @@ function inicioApp(){
 
   //Desactivamos botón enviar
   btnEnviar.disabled = true;
+}
+
+//Valida los campos input
+function validarCampo(){
+  
+   //validar longitud del campo
+   validarLongitud()
+}
+
+function validarLongitud(){
+  
 }
