@@ -33,9 +33,28 @@ function inicioApp(){
 function validarCampo(){
   
    //validar longitud del campo
-   validarLongitud()
+   validarLongitud(this)
+
+  let campoEmail = this;
+
+   //validar email
+   if(campoEmail.type === 'email'){
+     if(campoEmail.value.indexOf('@') !== -1){
+      campoEmail.style.borderBottomColor = 'green'
+      campoEmail.classList.remove('error')
+     }else{
+      campoEmail.style.borderBottomColor = 'red'
+      campoEmail.classList.add('error')
+     }
+   }
 }
 
-function validarLongitud(){
-  
+function validarLongitud(campo){
+  if(campo.value.length === 0){
+    campo.style.borderBottomColor = 'red'
+    campo.classList.add('error')
+  }else{
+    campo.style.borderBottomColor = 'green'
+    campo.classList.remove('error')
+  } 
 }
