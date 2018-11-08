@@ -19,6 +19,9 @@ function eventListeners(){
   email.addEventListener('blur', validarCampo)
   asunto.addEventListener('blur', validarCampo)
   mensaje.addEventListener('blur', validarCampo)
+
+  //Enviar mil
+  btnEnviar.addEventListener('click', enviarMail)
 }
 
 //Funciones
@@ -35,20 +38,21 @@ function validarCampo(){
    //validar longitud del campo
    validarLongitud(this)
 
-  let campoEmail = this;
-
    //validar email
-   if(campoEmail.type === 'email'){
-     if(campoEmail.value.indexOf('@') !== -1){
-      campoEmail.style.borderBottomColor = 'green'
-      campoEmail.classList.remove('error')
-     }else{
-      campoEmail.style.borderBottomColor = 'red'
-      campoEmail.classList.add('error')
-     }
+   if(this.type === 'email'){
+    validaEmail(this)   
    }
+
+   //Habilitar botón enviar
+   if(email.value !== '' && asunto.value !== '' && mensaje.value !== ''){
+    if(document.querySelectorAll('.error').length === 0){
+      btnEnviar.disabled = false;
+    }
+  }
 }
 
+
+//valida que los camos n esten vacios
 function validarLongitud(campo){
   if(campo.value.length === 0){
     campo.style.borderBottomColor = 'red'
@@ -57,4 +61,27 @@ function validarLongitud(campo){
     campo.style.borderBottomColor = 'green'
     campo.classList.remove('error')
   } 
+}
+
+//valida que la direccion de correo sea correcta
+function validaEmail(campo){
+  if(campo.value.indexOf('@') !== -1){
+    campo.style.borderBottomColor = 'green'
+    campo.classList.remove('error')
+  }else{
+    campo.style.borderBottomColor = 'red'
+    campo.classList.add('error')
+  }
+}
+
+function enviarMail(e){
+  e.preventDefault();
+  const loader = document.getElementById('spinner');
+  loader.style.display = 'block';
+
+
+
+  setTimeout(function() {
+    loader.style.display = 'none';
+  }, 3000)
 }
