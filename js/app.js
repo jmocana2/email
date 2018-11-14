@@ -20,8 +20,10 @@ function eventListeners(){
   asunto.addEventListener('blur', validarCampo)
   mensaje.addEventListener('blur', validarCampo)
 
-  //Enviar mil
+  //Enviar mail
   btnEnviar.addEventListener('click', enviarMail)
+  //Resetear form
+  btnreset.addEventListener('click', resetForm)
 }
 
 //Funciones
@@ -74,14 +76,31 @@ function validaEmail(campo){
   }
 }
 
+//Enviar mail
 function enviarMail(e){
   e.preventDefault();
   const loader = document.getElementById('spinner');
   loader.style.display = 'block';
 
+  const mailgif = document.createElement('img');
+  mailgif.src = "img/mail.gif";
+  mailgif.style.display = "block;" 
 
-
+  //mostramos gif del preloader
   setTimeout(function() {
     loader.style.display = 'none';
+    document.getElementById('loaders').appendChild(mailgif);    
+    
+    //mostramos gif del mail enviado
+    setTimeout(function() {
+      mailgif.remove();
+      document.getElementById('enviar-mail').reset();
+    }, 3000)    
   }, 3000)
+}
+
+//Resetear formulario
+function resetForm(e){
+  e.preventDefault();
+  document.getElementById('enviar-mail').reset();
 }
